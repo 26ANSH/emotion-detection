@@ -17,7 +17,7 @@ def detect_faces(path):
         print(deteted[0])
         return deteted[0]
     else:
-        faces = faces[0]
+        face = faces[0]
         print(face)
         return f"\nAnger : {deteted[face.anger_likelihood]} \n Joy : {deteted[face.joy_likelihood]} \n Sorrow : {deteted[face.sorrow_likelihood]}  \n Shock : {deteted[face.surprise_likelihood]} \n"
 
