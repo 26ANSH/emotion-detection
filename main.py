@@ -19,14 +19,14 @@ def upload():
     else:
         file = request.files['file']
         name = request.form.get('name')
-        path = "static/images/"+file.filename
+        file.filename = name
+        path = "static/images/"+file.filename+".png"
         file.save(path)
         try:
             emotions = detect_faces(path)
         except Exception:
             emotions = "Error"
     return render_template('result.html', name=name, emotions=emotions)
-
 
 @app.route('/emotion', methods=['POST'])
 def camera():
@@ -38,7 +38,6 @@ def camera():
         emotions = "Error"
     return render_template('result.html', name=name, emotions=emotions)
              
-
 if __name__ == '__main__':
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'api_key.json'
     app.run(host='127.0.0.1', port=8080, debug=True)

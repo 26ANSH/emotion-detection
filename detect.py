@@ -12,14 +12,14 @@ def detect_faces(path):
     response = client.face_detection(image=image)
     faces = response.face_annotations
 
-    deteted = ['UNKNOWN', 'NOO', 'NO', 'Maybe','YES', 'YESS']
+    deteted = ['UNKNOWN', 'Not Deteted', 'Not Deteted', 'Maybe','Deteted', 'Deteted']
     if len(faces) == 0:
         print(deteted[0])
         return deteted[0]
     else:
         face = faces[0]
         print(face)
-        return f"\nAnger : {deteted[face.anger_likelihood]} \n Joy : {deteted[face.joy_likelihood]} \n Sorrow : {deteted[face.sorrow_likelihood]}  \n Shock : {deteted[face.surprise_likelihood]} \n"
+        return f"Anger : {deteted[face.anger_likelihood]} || Joy : {deteted[face.joy_likelihood]} || Sorrow : {deteted[face.sorrow_likelihood]}  || Shock : {deteted[face.surprise_likelihood]}"
 
 # # ('UNKNOWN', 'VERY_UNLIKELY', 'UNLIKELY', 'POSSIBLE','LIKELY', 'VERY_LIKELY')
 # detect_faces('images/happy.png')
