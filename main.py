@@ -5,11 +5,27 @@ from detect import capture_image, detect_faces
 app = Flask(__name__)
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/', methods=['GET'])
 def root():
     #  If method was post
     if request.method == 'GET':
         return render_template('basic.html')
+
+@app.route('/upload', methods=['GET', 'POST'])
+def upload():
+    #  If method was post
+    if request.method == 'GET':
+        return render_template('basic2.html')
+    else:
+        file = request.files['file']
+        name = request.form.get('name')
+        path = "static/images/"+file.filename
+        file.save(path)
+        try:
+            emotions = detect_faces(path)
+        except Exception:
+            emotions = "Error"
+    return render_template('result.html', name=name, emotions=emotions)
 
 
 @app.route('/emotion', methods=['POST'])
