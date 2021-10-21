@@ -20,7 +20,6 @@ def camera():
         emotions = detect_faces(path)
     except Exception:
         emotions = "Error"
-
     return render_template('result.html', name=name, emotions=emotions)
              
 
