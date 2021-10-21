@@ -12,12 +12,14 @@ def detect_faces(path):
     response = client.face_detection(image=image)
     faces = response.face_annotations
 
-    deteted = ('UNKNOWN', 'NOO', 'NO', 'Maybe','YES', 'YESS')
+    deteted = ['UNKNOWN', 'NOO', 'NO', 'Maybe','YES', 'YESS']
     if len(faces) == 0:
-        return path, deteted[0]
+        print(deteted[0])
+        return deteted[0]
     else:
         faces = faces[0]
-        return path, deteted[face.anger_likelihood], deteted[face.joy_likelihood], deteted[face.sorrow_likelihood], deteted[face.surprise_likelihood]
+        print(face)
+        return f"\nAnger : {deteted[face.anger_likelihood]} \n Joy : {deteted[face.joy_likelihood]} \n Sorrow : {deteted[face.sorrow_likelihood]}  \n Shock : {deteted[face.surprise_likelihood]} \n"
 
 # # ('UNKNOWN', 'VERY_UNLIKELY', 'UNLIKELY', 'POSSIBLE','LIKELY', 'VERY_LIKELY')
 # detect_faces('images/happy.png')
@@ -25,6 +27,7 @@ def detect_faces(path):
 def capture_image(name):
     cap = cv2.VideoCapture(0)
     ret, frame = cap.read()
+    # img = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     path = 'static/images/{}.png'.format(name)
     cv2.imwrite(path, frame)
     cap.release()
